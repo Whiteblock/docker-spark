@@ -13,7 +13,7 @@ RUN apt-get update \
     procps \
     python3 \
     python3-setuptools \
-    unzip
+    unzip \
  && ln -s /usr/bin/python3 /usr/bin/python \
  && easy_install3 pip py4j \
  && apt-get clean \
