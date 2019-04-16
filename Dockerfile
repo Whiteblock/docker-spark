@@ -46,6 +46,7 @@ RUN curl -sL --retry 3 --insecure \
   && rm -rf $JAVA_HOME/man
 
 # HADOOP
+# TODO: upgrade to 3.1.2
 ENV HADOOP_VERSION 3.0.0
 ENV HADOOP_HOME /usr/hadoop-$HADOOP_VERSION
 ENV HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
