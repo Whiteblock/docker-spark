@@ -10,6 +10,7 @@ RUN apt-get update \
  && apt-get install -y \
     curl \
     locales \
+    lsb-release \
     gnupg2 \
     procps \
     python3 \
