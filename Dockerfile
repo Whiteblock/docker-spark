@@ -102,6 +102,6 @@ RUN curl -sL --retry 3 \
 WORKDIR $SPARK_HOME
 COPY entrypoint.sh entrypoint.sh
 RUN chmod a+x entrypoint.sh
-ENTRYPOINT ./entrypoint.sh
+ENTRYPOINT [ "${SPARK_HOME}/entrypoint.sh" ]
 
 #CMD ["bin/spark-class", "org.apache.spark.deploy.master.Master"]
