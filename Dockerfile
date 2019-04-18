@@ -94,4 +94,7 @@ RUN curl -sL --retry 3 \
  && mv /usr/$SPARK_PACKAGE $SPARK_HOME
 
 WORKDIR $SPARK_HOME
-CMD ["bin/spark-class", "org.apache.spark.deploy.master.Master"]
+COPY entrypoint.sh entrypoint.sh
+ENTRYPOINT ./entrypoint.sh
+
+#CMD ["bin/spark-class", "org.apache.spark.deploy.master.Master"]
