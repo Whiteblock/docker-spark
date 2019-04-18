@@ -10,6 +10,7 @@ RUN apt-get update \
  && apt-get install -y \
     curl \
     locales \
+    gnupg2 \
     procps \
     python3 \
     python3-setuptools \
