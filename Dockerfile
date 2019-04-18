@@ -21,7 +21,8 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-RUN pip install google-cloud-storage google-cloud-pubsub
+#RUN pip install google-cloud-storage google-cloud-pubsub
+RUN pip3 install google-cloud-storage google-cloud-pubsub
 
 # https://cloud.google.com/sdk/docs/downloads-apt-get
 # gcloud etc
