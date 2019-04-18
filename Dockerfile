@@ -16,7 +16,6 @@ RUN apt-get update \
     python3 \
     python3-setuptools \
     unzip \
- && ln -s /usr/bin/python3 /usr/bin/python \
  && easy_install3 pip py4j \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
@@ -41,8 +40,6 @@ RUN dpkg-reconfigure -f noninteractive locales \
  && locale-gen
 
 # http://blog.stuart.axelbrooke.com/python-3-on-spark-return-of-the-pythonhashseed
-ENV PYSPARK_PYTHON "/usr/bin/python3"
-ENV PYSPARK_DRIVER_PYTHON "python3"
 ENV PYTHONHASHSEED 0
 ENV PYTHONIOENCODING UTF-8
 ENV PIP_DISABLE_PIP_VERSION_CHECK 1
