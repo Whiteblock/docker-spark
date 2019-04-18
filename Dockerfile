@@ -29,6 +29,11 @@ WORKDIR /tmp
 COPY install-google-sdk.sh install-google-sdk.sh
 RUN ./install-google-sdk.sh
 
+# install kubectl v1.14.1
+WORKDIR /usr/local/bin
+RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.14.1/bin/linux/amd64/kubectl
+RUN chmod a+x kubectl
+
 RUN dpkg-reconfigure -f noninteractive locales \
  && locale-gen C.UTF-8 \
  && /usr/sbin/update-locale LANG=C.UTF-8 \
