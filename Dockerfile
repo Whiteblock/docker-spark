@@ -21,7 +21,7 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
-RUN pip install google-cloud-storage google-cloud-pubsub
+RUN pip install google-cloud-storage google-cloud-pubsub pyspark
 
 # https://cloud.google.com/sdk/docs/downloads-apt-get
 # gcloud etc
@@ -42,6 +42,7 @@ RUN dpkg-reconfigure -f noninteractive locales \
 
 # http://blog.stuart.axelbrooke.com/python-3-on-spark-return-of-the-pythonhashseed
 ENV PYSPARK_PYTHON "/usr/bin/python3"
+ENV PYSPARK_DRIVER_PYTHON "python3"
 ENV PYTHONHASHSEED 0
 ENV PYTHONIOENCODING UTF-8
 ENV PIP_DISABLE_PIP_VERSION_CHECK 1
