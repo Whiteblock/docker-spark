@@ -20,6 +20,12 @@ RUN apt-get update \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
 
+RUN dpkg-reconfigure -f noninteractive locales \
+ && locale-gen C.UTF-8 \
+ && /usr/sbin/update-locale LANG=C.UTF-8 \
+ && echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
+ && locale-gen
+
 RUN pip install google-cloud-storage google-cloud-pubsub pyspark
 
 # https://cloud.google.com/sdk/docs/downloads-apt-get
@@ -33,11 +39,11 @@ WORKDIR /usr/local/bin
 RUN curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.14.1/bin/linux/amd64/kubectl
 RUN chmod a+x kubectl
 
-RUN dpkg-reconfigure -f noninteractive locales \
- && locale-gen C.UTF-8 \
- && /usr/sbin/update-locale LANG=C.UTF-8 \
- && echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
- && locale-gen
+WORKDIR /sbin
+# https://github.com/krallin/tini
+ENV TINI_VERSION v0.18.0
+RUN curl -LO https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini
+RUN chmod a+x tini
 
 # http://blog.stuart.axelbrooke.com/python-3-on-spark-return-of-the-pythonhashseed
 ENV PYTHONHASHSEED 0
