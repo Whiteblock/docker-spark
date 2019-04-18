@@ -104,6 +104,9 @@ RUN curl -sL --retry 3 \
   | tar x -C /usr/ \
  && mv /usr/$SPARK_PACKAGE $SPARK_HOME
 
+# https://cloud.google.com/dataproc/docs/concepts/connectors/install-storage-connector
+COPY core-site.xml "${SPARK_HOME}/conf/core-site.xml"
+
 WORKDIR $SPARK_HOME
 COPY entrypoint.sh entrypoint.sh
 RUN chmod a+x entrypoint.sh

@@ -1,0 +1,4 @@
+<property>
+<name>spark.hadoop.google.cloud.auth.service.account.enable</name>
+<value>true</value>
+</property>
