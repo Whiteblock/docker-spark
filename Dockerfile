@@ -16,6 +16,7 @@ RUN apt-get update \
     python3 \
     python3-setuptools \
     unzip \
+ && ln -s /usr/bin/python3 /usr/bin/python \
  && easy_install3 pip py4j \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
