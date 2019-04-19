@@ -16,7 +16,6 @@ RUN apt-get update \
     python3 \
     python3-setuptools \
     unzip \
- && ln -s /usr/bin/python3 /usr/bin/python \
  && easy_install3 pip py4j \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/*
@@ -34,6 +33,8 @@ RUN pip install google-cloud google-cloud-storage google-cloud-pubsub pyspark
 WORKDIR /tmp
 COPY install-google-sdk.sh install-google-sdk.sh
 RUN ./install-google-sdk.sh
+# force everything to python3
+RUN ln -sf /usr/bin/python3 /usr/bin/python
 
 # https://storage.googleapis.com/hadoop-lib/gcs/gcs-connector-hadoop3-latest.jar
 # install google storage connector for hadoop
@@ -94,7 +95,6 @@ RUN curl -sL --retry 3 \
 
 # SPARK
 ENV SPARK_VERSION 2.4.1
-ENV PYSPARK_PYTHON "/usr/bin/python3"
 ENV SPARK_PACKAGE spark-${SPARK_VERSION}-bin-without-hadoop
 ENV SPARK_HOME /usr/spark-${SPARK_VERSION}
 ENV SPARK_DIST_CLASSPATH="$HADOOP_HOME/etc/hadoop/*:$HADOOP_HOME/share/hadoop/common/lib/*:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/hdfs/*:$HADOOP_HOME/share/hadoop/hdfs/lib/*:$HADOOP_HOME/share/hadoop/hdfs/*:$HADOOP_HOME/share/hadoop/yarn/lib/*:$HADOOP_HOME/share/hadoop/yarn/*:$HADOOP_HOME/share/hadoop/mapreduce/lib/*:$HADOOP_HOME/share/hadoop/mapreduce/*:$HADOOP_HOME/share/hadoop/tools/lib/*:/opt/jars/gcs-connector-hadoop3-latest.jar"
