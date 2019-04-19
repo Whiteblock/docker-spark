@@ -27,7 +27,7 @@ RUN dpkg-reconfigure -f noninteractive locales \
  && echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
  && locale-gen
 
-RUN pip install google-cloud-storage google-cloud-pubsub pyspark
+RUN pip install google-cloud google-cloud-storage google-cloud-pubsub pyspark
 
 # https://cloud.google.com/sdk/docs/downloads-apt-get
 # gcloud etc
