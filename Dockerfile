@@ -92,6 +92,7 @@ RUN curl -sL --retry 3 \
   "https://archive.apache.org/dist/hive/hive-$HIVE_VERSION/apache-hive-$HIVE_VERSION-bin.tar.gz" \
   | gunzip \
   | tar -x -C /usr/
+COPY hive-site.xml /usr/apache-hive-3.1.1-bin/conf/hive-site.xml
 
 # SPARK
 ENV SPARK_VERSION 2.4.1

@@ -1,0 +1,41 @@
+<!--
+<property>
+  <name>javax.jdo.option.ConnectionURL</name>
+  <value>jdbc:postgresql://myhost/metastore</value>
+</property>
+-->
+
+<property>
+  <name>javax.jdo.option.ConnectionDriverName</name>
+  <value>org.postgresql.Driver</value>
+</property>
+
+<!--
+<property>
+  <name>javax.jdo.option.ConnectionUserName</name>
+  <value>hiveuser</value>
+</property>
+
+<property>
+  <name>javax.jdo.option.ConnectionPassword</name>
+  <value>mypassword</value>
+</property>
+-->
+
+<property>
+  <name>datanucleus.autoCreateSchema</name>
+  <value>true</value>
+</property>
+
+<!--
+<property>
+  <name>hive.metastore.uris</name>
+  <value>thrift://<n.n.n.n>:9083</value>
+  <description>IP address (or fully-qualified domain name) and port of the metastore host</description>
+</property>
+-->
+
+<property>
+  <name>hive.metastore.schema.verification</name>
+  <value>true</value>
+</property>
