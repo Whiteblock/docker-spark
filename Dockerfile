@@ -28,6 +28,8 @@ RUN dpkg-reconfigure -f noninteractive locales \
  && echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen \
  && locale-gen
 
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64
+
 RUN pip install google-cloud google-cloud-storage google-cloud-pubsub pyspark
 
 # https://cloud.google.com/sdk/docs/downloads-apt-get
