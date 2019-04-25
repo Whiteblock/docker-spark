@@ -74,8 +74,7 @@ RUN curl -sL --retry 3 --insecure \
   && rm -rf $JAVA_HOME/man
 
 # HADOOP
-# TODO: upgrade to 3.1.2
-ENV HADOOP_VERSION 3.0.0
+ENV HADOOP_VERSION 3.2.0
 ENV HADOOP_HOME /usr/hadoop-$HADOOP_VERSION
 ENV HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
 ENV PATH $PATH:$HADOOP_HOME/bin
@@ -87,7 +86,8 @@ RUN curl -sL --retry 3 \
 # HIVE
 # https://spark.apache.org/docs/latest/sql-migration-guide-hive-compatibility.html
 # latest supported version is 2.3.3 as of Apr 2019
-ENV HIVE_VERSION 2.3.3
+# 2.3.4 came out 7 November 2018 so according to semver it *SHOULD* be safe
+ENV HIVE_VERSION 2.3.4
 ENV HIVE_HOME /usr/apache-hive-$HIVE_VERSION-bin
 ENV PATH $PATH:$HIVE_HOME/bin
 RUN curl -sL --retry 3 \
@@ -97,7 +97,7 @@ RUN curl -sL --retry 3 \
 COPY hive-site.xml /usr/apache-hive-2.3.3-bin/conf/hive-site.xml
 
 # SPARK
-ENV SPARK_VERSION 2.4.1
+ENV SPARK_VERSION 2.4.2
 ENV SPARK_PACKAGE spark-${SPARK_VERSION}-bin-without-hadoop
 ENV SPARK_HOME /usr/spark-${SPARK_VERSION}
 ENV SPARK_DIST_CLASSPATH="$HADOOP_HOME/etc/hadoop/*:$HADOOP_HOME/share/hadoop/common/lib/*:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/hdfs/*:$HADOOP_HOME/share/hadoop/hdfs/lib/*:$HADOOP_HOME/share/hadoop/hdfs/*:$HADOOP_HOME/share/hadoop/yarn/lib/*:$HADOOP_HOME/share/hadoop/yarn/*:$HADOOP_HOME/share/hadoop/mapreduce/lib/*:$HADOOP_HOME/share/hadoop/mapreduce/*:$HADOOP_HOME/share/hadoop/tools/lib/*:/opt/jars/gcs-connector-hadoop3-latest.jar"
