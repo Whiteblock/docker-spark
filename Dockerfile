@@ -42,6 +42,8 @@ RUN ln -sf /usr/bin/python3 /usr/bin/python
 # install google storage connector for hadoop
 WORKDIR /opt/jars
 RUN curl -LO https://storage.googleapis.com/hadoop-lib/gcs/gcs-connector-hadoop3-latest.jar
+# install postgresql jdbc driver
+RUN curl -LO https://jdbc.postgresql.org/download/postgresql-42.2.5.jar
 
 # install kubectl v1.14.1
 WORKDIR /usr/local/bin
@@ -62,7 +64,8 @@ ENV PIP_DISABLE_PIP_VERSION_CHECK 1
 # HADOOP
 ENV HADOOP_VERSION 3.2.0
 ENV HADOOP_HOME /usr/hadoop-$HADOOP_VERSION
-ENV HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+ENV HADOOP_CONF_DIR $HADOOP_HOME/etc/hadoop
+ENV HADOOP_DIST_CLASSPATH=/opt/jars/*
 ENV PATH $PATH:$HADOOP_HOME/bin
 RUN curl -sL --retry 3 \
   "https://archive.apache.org/dist/hadoop/common/hadoop-$HADOOP_VERSION/hadoop-$HADOOP_VERSION.tar.gz" \
@@ -83,7 +86,7 @@ COPY hive-site.xml /usr/apache-hive-2.3.3-bin/conf/hive-site.xml
 ENV SPARK_VERSION 2.4.2
 ENV SPARK_PACKAGE spark-${SPARK_VERSION}-bin-without-hadoop
 ENV SPARK_HOME /usr/spark-${SPARK_VERSION}
-ENV SPARK_DIST_CLASSPATH="$HADOOP_HOME/etc/hadoop/*:$HADOOP_HOME/share/hadoop/common/lib/*:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/hdfs/*:$HADOOP_HOME/share/hadoop/hdfs/lib/*:$HADOOP_HOME/share/hadoop/hdfs/*:$HADOOP_HOME/share/hadoop/yarn/lib/*:$HADOOP_HOME/share/hadoop/yarn/*:$HADOOP_HOME/share/hadoop/mapreduce/lib/*:$HADOOP_HOME/share/hadoop/mapreduce/*:$HADOOP_HOME/share/hadoop/tools/lib/*:/opt/jars/gcs-connector-hadoop3-latest.jar"
+ENV SPARK_DIST_CLASSPATH="$HADOOP_HOME/etc/hadoop/*:$HADOOP_HOME/share/hadoop/common/lib/*:$HADOOP_HOME/share/hadoop/common/*:$HADOOP_HOME/share/hadoop/hdfs/*:$HADOOP_HOME/share/hadoop/hdfs/lib/*:$HADOOP_HOME/share/hadoop/hdfs/*:$HADOOP_HOME/share/hadoop/yarn/lib/*:$HADOOP_HOME/share/hadoop/yarn/*:$HADOOP_HOME/share/hadoop/mapreduce/lib/*:$HADOOP_HOME/share/hadoop/mapreduce/*:$HADOOP_HOME/share/hadoop/tools/lib/*:/opt/jars/*"
 ENV PATH $PATH:${SPARK_HOME}/bin
 RUN curl -sL --retry 3 \
   "https://archive.apache.org/dist/spark/spark-${SPARK_VERSION}/${SPARK_PACKAGE}.tgz" \
