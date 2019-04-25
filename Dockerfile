@@ -85,14 +85,16 @@ RUN curl -sL --retry 3 \
   | tar -x -C /usr/
 
 # HIVE
-ENV HIVE_VERSION 3.1.1
+# https://spark.apache.org/docs/latest/sql-migration-guide-hive-compatibility.html
+# latest supported version is 2.3.3 as of Apr 2019
+ENV HIVE_VERSION 2.3.3
 ENV HIVE_HOME /usr/apache-hive-$HIVE_VERSION-bin
 ENV PATH $PATH:$HIVE_HOME/bin
 RUN curl -sL --retry 3 \
   "https://archive.apache.org/dist/hive/hive-$HIVE_VERSION/apache-hive-$HIVE_VERSION-bin.tar.gz" \
   | gunzip \
   | tar -x -C /usr/
-COPY hive-site.xml /usr/apache-hive-3.1.1-bin/conf/hive-site.xml
+COPY hive-site.xml /usr/apache-hive-2.3.3-bin/conf/hive-site.xml
 
 # SPARK
 ENV SPARK_VERSION 2.4.1
