@@ -86,8 +86,7 @@ RUN curl -sL --retry 3 \
 # HIVE
 # https://spark.apache.org/docs/latest/sql-migration-guide-hive-compatibility.html
 # latest supported version is 2.3.3 as of Apr 2019
-# 2.3.4 came out 7 November 2018 so according to semver it *SHOULD* be safe
-ENV HIVE_VERSION 2.3.4
+ENV HIVE_VERSION 2.3.3
 ENV HIVE_HOME /usr/apache-hive-$HIVE_VERSION-bin
 ENV PATH $PATH:$HIVE_HOME/bin
 RUN curl -sL --retry 3 \
