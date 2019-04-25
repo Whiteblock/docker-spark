@@ -19,6 +19,9 @@
 # echo commands to the terminal output
 set -ex
 
+# SETUP HIVE CLASSPATH FOR SPARK
+export SPARK_DIST_CLASSPATH="$(find "$HIVE_HOME/lib/" -name '*.jar' -print0 | sed 's/\x0/:/g'):$SPARK_DIST_CLASSPATH"
+
 # Check whether there is a passwd entry for the container UID
 myuid=$(id -u)
 mygid=$(id -g)
