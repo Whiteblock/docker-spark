@@ -28,13 +28,11 @@
     <value>true</value>
   </property>
 
-  <!--
   <property>
     <name>hive.metastore.uris</name>
-    <value>thrift://<n.n.n.n>:9083</value>
+    <value>thrift://hive:9083</value>
     <description>IP address (or fully-qualified domain name) and port of the metastore host</description>
   </property>
-  -->
 
   <property>
     <name>hive.metastore.schema.verification</name>
