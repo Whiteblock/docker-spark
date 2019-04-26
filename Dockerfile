@@ -75,7 +75,7 @@ RUN curl -sL --retry 3 \
   | tar -x -C /usr/
 
 # HIVE
-ENV HIVE_VERSION 3.1.1
+ENV HIVE_VERSION 2.3.4
 ENV HIVE_HOME /usr/apache-hive-$HIVE_VERSION-bin
 ENV PATH $PATH:$HIVE_HOME/bin
 RUN curl -sL --retry 3 \
